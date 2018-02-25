@@ -16,5 +16,5 @@
 
 <manifest package="github.nisrulz.packagehunter">
 
-    <application></application>
+    <application />
 </manifest>

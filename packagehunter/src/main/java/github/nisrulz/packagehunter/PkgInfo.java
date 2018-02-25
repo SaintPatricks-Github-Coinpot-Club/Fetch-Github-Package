@@ -66,16 +66,6 @@ public class PkgInfo implements Parcelable {
         return 0;
     }
 
-    @Override
-    public void writeToParcel(Parcel parcel, int i) {
-        parcel.writeString(appName);
-        parcel.writeString(packageName);
-        parcel.writeString(versionName);
-        parcel.writeInt(versionCode);
-        parcel.writeLong(firstInstallTime);
-        parcel.writeLong(lastUpdateTime);
-    }
-
     public String getAppName() {
         return appName;
     }
@@ -135,6 +125,16 @@ public class PkgInfo implements Parcelable {
                 + versionName
                 + " | VersionCode :"
                 + versionCode;
+    }
+
+    @Override
+    public void writeToParcel(Parcel parcel, int i) {
+        parcel.writeString(appName);
+        parcel.writeString(packageName);
+        parcel.writeString(versionName);
+        parcel.writeInt(versionCode);
+        parcel.writeLong(firstInstallTime);
+        parcel.writeLong(lastUpdateTime);
     }
 }
 

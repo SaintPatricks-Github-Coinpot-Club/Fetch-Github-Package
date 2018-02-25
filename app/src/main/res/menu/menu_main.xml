@@ -20,24 +20,24 @@
     <item
         android:id="@+id/action_search"
         android:icon="@drawable/ic_search_white_24dp"
-        android:title="Search"
+        android:title="@string/menu_nav_search"
         app:actionViewClass="android.support.v7.widget.SearchView"
         app:showAsAction="always|collapseActionView" />
 
     <item
         android:id="@+id/action_refresh"
         android:icon="@drawable/ic_refresh_white_24dp"
-        android:title="Reload"
+        android:title="@string/menu_nav_reload"
         app:showAsAction="ifRoom" />
     <item
         android:id="@+id/action_privacy"
         android:icon="@drawable/ic_info_outline_white_24dp"
-        android:title="Privacy Policy"
+        android:title="@string/menu_nav_privacy_policy"
         app:showAsAction="ifRoom" />
 
     <item
         android:id="@+id/action_about"
         android:icon="@drawable/ic_info_outline_white_24dp"
-        android:title="About"
+        android:title="@string/menu_nav_about"
         app:showAsAction="ifRoom" />
 </menu>

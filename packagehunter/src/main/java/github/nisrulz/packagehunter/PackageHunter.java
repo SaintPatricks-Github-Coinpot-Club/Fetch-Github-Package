@@ -17,9 +17,11 @@
 package github.nisrulz.packagehunter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.os.Build;
 import android.util.Log;
 import java.util.ArrayList;
@@ -62,14 +64,14 @@ public class PackageHunter {
             }
             return data.toArray(new String[data.size()]);
         } else {
-            return null;
+            return new String[0];
         }
     }
 
     public String getAppNameForPkg(String packageName) {
         PackageInfo packageInfo = getPkgInfo(packageName, 0);
         return packageInfo != null ? packageInfo.applicationInfo.loadLabel(packageManager).toString()
-                : null;
+                : "NA";
     }
 
     public long getFirstInstallTimeForPkg(String packageName) {
@@ -123,7 +125,7 @@ public class PackageHunter {
             }
             return data.toArray(new String[data.size()]);
         } else {
-            return null;
+            return new String[0];
         }
     }
 
@@ -136,7 +138,7 @@ public class PackageHunter {
             }
             return data.toArray(new String[data.size()]);
         } else {
-            return null;
+            return new String[0];
         }
     }
 
@@ -149,7 +151,7 @@ public class PackageHunter {
             }
             return data.toArray(new String[data.size()]);
         } else {
-            return null;
+            return new String[0];
         }
     }
 
@@ -160,7 +162,7 @@ public class PackageHunter {
 
     public String getVersionForPkg(String packageName) {
         PackageInfo packageInfo = getPkgInfo(packageName, 0);
-        return packageInfo != null ? packageInfo.versionName : null;
+        return packageInfo != null ? packageInfo.versionName : "NA";
     }
 
     public ArrayList<PkgInfo> searchInList(String query, int flag) {
@@ -257,6 +259,12 @@ public class PackageHunter {
         return pkgInfoArrayList;
     }
 
+    public void uninstallPackage(String packageName) {
+        Intent intent = new Intent(Intent.ACTION_DELETE);
+        intent.setData(Uri.parse("package:" + packageName));
+        context.startActivity(intent);
+    }
+
     private ArrayList<PkgInfo> getAllPackagesInfo(int flag) {
         ArrayList<PkgInfo> pkgInfoArrayList = new ArrayList<>();
 
@@ -296,6 +304,7 @@ public class PackageHunter {
         }
         return pkgInfoArrayList;
     }
+
 
     private PackageInfo getPkgInfo(String packageName, int flag) {
         try {

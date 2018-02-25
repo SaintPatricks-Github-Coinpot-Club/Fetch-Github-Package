@@ -14,9 +14,9 @@
  * limitations under the License.
  */
 
-package github.nisrulz.projectpackagehunter;
+package github.nisrulz.projectpackagehunter.modal;
 
-class ElementInfo {
+public class ElementInfo {
 
     private String[] details;
 

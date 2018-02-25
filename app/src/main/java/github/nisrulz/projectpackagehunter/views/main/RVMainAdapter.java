@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package github.nisrulz.projectpackagehunter;
+package github.nisrulz.projectpackagehunter.views.main;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
@@ -26,9 +26,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import github.nisrulz.packagehunter.PackageHunter;
 import github.nisrulz.packagehunter.PkgInfo;
+import github.nisrulz.projectpackagehunter.R;
 import java.util.List;
 
-class RVMainAdapter extends RecyclerView.Adapter<RVMainAdapter.ItemViewHolder> {
+public class RVMainAdapter extends RecyclerView.Adapter<RVMainAdapter.ItemViewHolder> {
 
     public class ItemViewHolder extends RecyclerView.ViewHolder {
 
@@ -40,9 +41,9 @@ class RVMainAdapter extends RecyclerView.Adapter<RVMainAdapter.ItemViewHolder> {
 
         public ItemViewHolder(View itemView) {
             super(itemView);
-            txt_appname = (TextView) itemView.findViewById(R.id.txtvw_appname);
-            txt_pkgname = (TextView) itemView.findViewById(R.id.txtvw_pkgname);
-            icon = (ImageView) itemView.findViewById(R.id.imgvw_icn);
+            txt_appname = itemView.findViewById(R.id.txtvw_appname);
+            txt_pkgname = itemView.findViewById(R.id.txtvw_pkgname);
+            icon = itemView.findViewById(R.id.imgvw_icn);
         }
     }
 
@@ -56,12 +57,8 @@ class RVMainAdapter extends RecyclerView.Adapter<RVMainAdapter.ItemViewHolder> {
     }
 
     @Override
-    public ItemViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-
-        View view =
-                LayoutInflater.from(parent.getContext()).inflate(R.layout.rv_main_item, parent, false);
-
-        return new ItemViewHolder(view);
+    public int getItemCount() {
+        return dataList.size();
     }
 
     @Override
@@ -74,8 +71,12 @@ class RVMainAdapter extends RecyclerView.Adapter<RVMainAdapter.ItemViewHolder> {
     }
 
     @Override
-    public int getItemCount() {
-        return dataList.size();
+    public ItemViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+
+        View view =
+                LayoutInflater.from(parent.getContext()).inflate(R.layout.rv_main_item, parent, false);
+
+        return new ItemViewHolder(view);
     }
 
     public void updateWithNewListData(List<PkgInfo> newDataList) {

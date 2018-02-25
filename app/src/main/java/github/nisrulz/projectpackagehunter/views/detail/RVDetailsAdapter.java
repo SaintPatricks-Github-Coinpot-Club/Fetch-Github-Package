@@ -14,16 +14,18 @@
  * limitations under the License.
  */
 
-package github.nisrulz.projectpackagehunter;
+package github.nisrulz.projectpackagehunter.views.detail;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import github.nisrulz.projectpackagehunter.R;
+import github.nisrulz.projectpackagehunter.modal.ElementInfo;
 import java.util.List;
 
-class RVDetailsAdapter extends RecyclerView.Adapter<RVDetailsAdapter.ItemViewHolder> {
+public class RVDetailsAdapter extends RecyclerView.Adapter<RVDetailsAdapter.ItemViewHolder> {
 
     public class ItemViewHolder extends RecyclerView.ViewHolder {
 
@@ -33,8 +35,8 @@ class RVDetailsAdapter extends RecyclerView.Adapter<RVDetailsAdapter.ItemViewHol
 
         public ItemViewHolder(View itemView) {
             super(itemView);
-            txtvw_header = (TextView) itemView.findViewById(R.id.txtvw_header);
-            txtvw_details = (TextView) itemView.findViewById(R.id.txtvw_details);
+            txtvw_header = itemView.findViewById(R.id.txtvw_header);
+            txtvw_details = itemView.findViewById(R.id.txtvw_details);
         }
     }
 
@@ -45,12 +47,8 @@ class RVDetailsAdapter extends RecyclerView.Adapter<RVDetailsAdapter.ItemViewHol
     }
 
     @Override
-    public ItemViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-
-        View view =
-                LayoutInflater.from(parent.getContext()).inflate(R.layout.rv_details_item, parent, false);
-
-        return new ItemViewHolder(view);
+    public int getItemCount() {
+        return dataList.size();
     }
 
     @Override
@@ -60,7 +58,11 @@ class RVDetailsAdapter extends RecyclerView.Adapter<RVDetailsAdapter.ItemViewHol
     }
 
     @Override
-    public int getItemCount() {
-        return dataList.size();
+    public ItemViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+
+        View view =
+                LayoutInflater.from(parent.getContext()).inflate(R.layout.rv_details_item, parent, false);
+
+        return new ItemViewHolder(view);
     }
 }
