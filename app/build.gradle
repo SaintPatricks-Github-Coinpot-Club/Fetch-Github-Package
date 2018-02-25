@@ -15,14 +15,17 @@
  */
 
 apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
 
 android {
-    compileSdkVersion rootProject.ext.compileSdkVersion
-    buildToolsVersion rootProject.ext.buildToolsVersion
+    compileSdkVersion versions.compile_sdk
 
     defaultConfig {
-        minSdkVersion rootProject.ext.minSdkVersion
-        targetSdkVersion rootProject.ext.targetSdkVersion
+
+        minSdkVersion versions.min_sdk
+        targetSdkVersion versions.target_sdk
+
         applicationId "github.nisrulz.projectpackagehunter"
         versionCode 2
         versionName "1.1"
@@ -33,15 +36,23 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
 }
 
 dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
-    testImplementation 'junit:junit:4.12'
-
-    implementation "com.android.support:appcompat-v7:${rootProject.ext.supportLibVersion}"
-    implementation "com.android.support:design:${rootProject.ext.supportLibVersion}"
-    implementation "com.android.support:cardview-v7:${rootProject.ext.supportLibVersion}"
-
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    testImplementation deps.junit
+    implementation deps.app_compat_v7
+    implementation deps.support_design
+    implementation deps.support_cardview
+    implementation deps.support_recyclerview
+    implementation deps.recycler_view_helper
+    implementation deps.kotlin_std_lib
     implementation project(':packagehunter')
+}
+repositories {
+    mavenCentral()
 }
