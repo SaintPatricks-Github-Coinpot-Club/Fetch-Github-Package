@@ -45,15 +45,14 @@ public class ElementInfo {
 
     @Override
     public String toString() {
-        if (details != null) {
-            super.toString();
+        super.toString();
+        if (details.length != 0) {
             StringBuilder stringBuilder = new StringBuilder();
-            for (int i = 0; i < details.length; i++) {
-                stringBuilder.append(details[i]).append("\n");
+            for (final String detail : details) {
+                stringBuilder.append(detail).append("\n");
             }
             return stringBuilder.toString();
         } else {
-            super.toString();
             return "NA";
         }
     }
