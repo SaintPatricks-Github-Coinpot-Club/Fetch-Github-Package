@@ -36,7 +36,7 @@ public class ElementInfo {
     }
 
     public String getHeader() {
-        return header;
+        return String.format("%s (%d)", header, details.length);
     }
 
     public void setHeader(String header) {
@@ -48,8 +48,10 @@ public class ElementInfo {
         super.toString();
         if (details.length != 0) {
             StringBuilder stringBuilder = new StringBuilder();
-            for (final String detail : details) {
-                stringBuilder.append(detail).append("\n");
+            for (int i = 0; i < details.length; i++) {
+                stringBuilder
+                        .append(i+1).append(">  ").append(details[i])
+                        .append("\n");
             }
             return stringBuilder.toString();
         } else {
