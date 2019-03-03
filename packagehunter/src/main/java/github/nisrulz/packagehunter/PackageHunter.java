@@ -260,7 +260,7 @@ public class PackageHunter {
     }
 
     public void uninstallPackage(String packageName) {
-        Intent intent = new Intent(Intent.ACTION_DELETE);
+        Intent intent = new Intent(Intent.ACTION_UNINSTALL_PACKAGE);
         intent.setData(Uri.parse("package:" + packageName));
         context.startActivity(intent);
     }
