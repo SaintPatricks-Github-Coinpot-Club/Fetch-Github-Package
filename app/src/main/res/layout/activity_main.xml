@@ -23,13 +23,6 @@
 
     <include layout="@layout/toolbar" />
 
-    <include
-        android:id="@+id/brandSection"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:visibility="visible"
-        layout="@layout/brand_section" />
-
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_pkglist"
         android:layout_width="match_parent"

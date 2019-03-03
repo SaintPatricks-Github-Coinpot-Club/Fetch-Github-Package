@@ -32,7 +32,6 @@ import github.nisrulz.projectpackagehunter.views.AboutActivity
 import github.nisrulz.projectpackagehunter.views.detail.DetailActivity
 import github.nisrulz.recyclerviewhelper.RVHItemClickListener
 import github.nisrulz.recyclerviewhelper.RVHItemClickListener.OnItemClickListener
-import kotlinx.android.synthetic.main.activity_main.brandSection
 import kotlinx.android.synthetic.main.toolbar.toolbar
 import java.util.ArrayList
 
@@ -47,6 +46,9 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        // Make sure this is before calling super.onCreate
+        setTheme(R.style.AppTheme_NoActionBar)
         setContentView(R.layout.activity_main)
 
         setSupportActionBar(toolbar)
@@ -63,7 +65,6 @@ class MainActivity : AppCompatActivity() {
         rv.layoutManager = androidx.recyclerview.widget.LinearLayoutManager(this)
         rv.adapter = adapter
 
-        brandSection.visibility = View.GONE
         rv.visibility = View.VISIBLE
 
         // Set On Click
