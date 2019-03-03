@@ -16,8 +16,8 @@
 
 ext {
     libConfig = [
-            versionCode     : 7,
-            versionName     : '1.1.5',
+            versionCode     : 8,
+            versionName     : '1.1.6',
             pomUrl          : 'https://github.com/nisrulz/packagehunter',
             githubRepo      : 'nisrulz/packagehunter',
 
