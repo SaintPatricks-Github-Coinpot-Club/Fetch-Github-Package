@@ -13,73 +13,20 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 
 buildscript {
-    ext.versions = [
-            "min_sdk"     : 14,
-            "target_sdk"  : 28,
-            "compile_sdk" : 28,
-            "android_gradle_plugin" : "3.2.1",
-
-            // Publish Library
-            "gradle_bintray_plugin" : "1.8.1",
-            "android_maven_gradle_plugin" : "2.0",
-
-            // Support
-            "support_lib" : "28.0.0",
-
-            // Testing
-            "junit" : "4.12",
-
-            // Kotlin
-            "kotlin_version" : "1.3.0"
-    ]
-
-    ext.deps = [
-            // Android Studio
-            "android_gradle_plugin" : "com.android.tools.build:gradle:${versions.android_gradle_plugin}",
-
-            // Publish library
-            "gradle_bintray_plugin" : "com.jfrog.bintray.gradle:gradle-bintray-plugin:${versions.gradle_bintray_plugin}",
-            "android_maven_gradle_plugin" : "com.github.dcendents:android-maven-gradle-plugin:${versions.android_maven_gradle_plugin}",
-
-            //Support Library
-            "app_compat_v7"       : "com.android.support:appcompat-v7:${versions.support_lib}",
-            "support_design"       : "com.android.support:design:${versions.support_lib}",
-            "support_cardview"       : "com.android.support:cardview-v7:${versions.support_lib}",
-            "support_recyclerview"       : "com.android.support:recyclerview-v7:${versions.support_lib}",
-
-            // Recycler View Helper
-            "recycler_view_helper"       : "com.github.nisrulz:recyclerviewhelper:${versions.support_lib}",
-
-            // Kotlin Plugin
-            "kotlin_plugin"       : "org.jetbrains.kotlin:kotlin-gradle-plugin:${versions.kotlin_version}",
-
-            // Kotlin Std Lib
-            "kotlin_std_lib"       : "org.jetbrains.kotlin:kotlin-stdlib-jdk7:${versions.kotlin_version}",
-
-            // Testing
-            "junit" : "junit:junit:${versions.junit}"
-    ]
-
-
+    // Gradle will not find vars defined in an external file when referring to them
+    // in the buildscript block, unless you link it from the buildscript block, too.
+    apply from: 'dependencies.gradle'
 
     repositories {
         google()
         jcenter()
     }
     dependencies {
-        classpath deps.android_gradle_plugin
-
-        // NOTE: Do not place your application dependencies here; they belong
-        // in the individual module build.gradle files
-
-        // Required plugins added to classpath to facilitate pushing to Jcenter/Bintray
-        classpath deps.gradle_bintray_plugin
-        classpath deps.android_maven_gradle_plugin
-        classpath deps.kotlin_plugin
+        // See dependencies.gradle for declaration of plugins.
+        classpath gradlePlugins
     }
 }
 
@@ -92,16 +39,4 @@ allprojects {
 
 task clean(type: Delete) {
     delete rootProject.buildDir
-}
-
-ext {
-    // Library Info
-    libVersionCode = 7
-    libVersionName = '1.1.5'
-    libPomUrl = 'https://github.com/nisrulz/packagehunter'
-    libGithubRepo = 'nisrulz/packagehunter'
-
-    libModuleName = 'packagehunter'
-    libModuleDesc = 'Android library to hunt down package information'
-    libBintrayName = 'com.github.nisrulz:packagehunter'
 }

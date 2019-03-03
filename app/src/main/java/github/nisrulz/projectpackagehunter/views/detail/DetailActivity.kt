@@ -17,8 +17,8 @@
 package github.nisrulz.projectpackagehunter.views.detail
 
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
-import android.support.v7.widget.LinearLayoutManager
+import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.LinearLayoutManager
 import github.nisrulz.packagehunter.PackageHunter
 import github.nisrulz.projectpackagehunter.R
 import github.nisrulz.projectpackagehunter.modal.ElementInfo
@@ -68,7 +68,7 @@ class DetailActivity : AppCompatActivity() {
 
         val adapter = RVDetailsAdapter(getInfoLists(packageName))
         rv_detaillist.setHasFixedSize(true)
-        rv_detaillist.layoutManager = LinearLayoutManager(this)
+        rv_detaillist.layoutManager = androidx.recyclerview.widget.LinearLayoutManager(this)
         rv_detaillist.adapter = adapter
     }
 

@@ -19,11 +19,11 @@ package github.nisrulz.projectpackagehunter.views.main
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-import android.support.v4.view.MenuItemCompat
-import android.support.v7.app.AppCompatActivity
-import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.RecyclerView
-import android.support.v7.widget.SearchView
+import androidx.core.view.MenuItemCompat
+import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import androidx.appcompat.widget.SearchView
 import android.view.Menu
 import android.view.MenuItem
 import github.nisrulz.packagehunter.PackageHunter
@@ -53,12 +53,12 @@ class MainActivity : AppCompatActivity() {
 
         packageHunter = PackageHunter(this)
 
-        val rv = findViewById<RecyclerView>(R.id.rv_pkglist)
+        val rv = findViewById<androidx.recyclerview.widget.RecyclerView>(R.id.rv_pkglist)
         pkgInfoArrayList = packageHunter.installedPackages
 
         adapter = RVMainAdapter(this, pkgInfoArrayList)
         rv.hasFixedSize()
-        rv.layoutManager = LinearLayoutManager(this)
+        rv.layoutManager = androidx.recyclerview.widget.LinearLayoutManager(this)
         rv.adapter = adapter
 
         // Set On Click
