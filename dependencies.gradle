@@ -56,7 +56,7 @@ ext {
             appcompatV7 : "androidx.appcompat:appcompat:$versions.support",
             cardView    : "androidx.cardview:cardview:$versions.support",
             recyclerView: "androidx.recyclerview:recyclerview:$versions.support",
-            design      : "com.google.android.material:material:${versions.support}-rc01",
+            design      : "com.google.android.material:material:${versions.support}",
     ]
 
     unitTest = [

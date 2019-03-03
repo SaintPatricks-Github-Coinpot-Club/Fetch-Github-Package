@@ -19,12 +19,20 @@ package github.nisrulz.projectpackagehunter.views
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import github.nisrulz.projectpackagehunter.R
+import github.nisrulz.projectpackagehunter.R.string
+import github.nisrulz.projectpackagehunter.utils.openInBrowser
+import kotlinx.android.synthetic.main.activity_about.linkToGithub
 
 class AboutActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_about)
+
+        linkToGithub.setOnClickListener {
+            openInBrowser(getString(string.url_github))
+            overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out)
+        }
     }
 
     override fun onBackPressed() {

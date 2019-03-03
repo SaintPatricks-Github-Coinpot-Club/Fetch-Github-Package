@@ -14,26 +14,29 @@
   ~ limitations under the License.
   -->
 
+
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/colorPrimaryDark"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
     android:gravity="center"
-    android:orientation="vertical"
-    tools:context="github.nisrulz.projectpackagehunter.views.AboutActivity">
+    android:orientation="vertical">
 
-    <include
-        android:id="@+id/brandSection"
-        layout="@layout/brand_section" />
-
-    <TextView
-        android:id="@+id/linkToGithub"
+    <ImageView
+        android:id="@+id/imageView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:gravity="center"
-        android:text="@string/about_info"
-        android:textColor="@android:color/white"
-        android:textSize="15sp" />
+        android:paddingBottom="20dp"
+        android:src="@mipmap/ic_launcher" />
 
+    <TextView
+        android:id="@+id/text_appname"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/appName"
+        android:textColor="@android:color/white"
+        android:textSize="20sp"
+        android:textStyle="bold" />
 </LinearLayout>
+
+
+

@@ -17,6 +17,7 @@
 <resources>
     <string name="appName">PackageHunter</string>
     <string name="about_info">\nOpen sourced at @Github\nhttps://github.com/nisrulz/packagehunter\n\n Built by Nishant Srivastava</string>
+    <string name="url_github">nhttps://github.com/nisrulz/packagehunter</string>
     <string name="url_privacy_policy">https://cdn.rawgit.com/nisrulz/f142e91b83497ae254499d1d44b4afad/raw/1c46f779a80db0bd4946273acdf8109874984eac/PackageHunterPrivacyPolicy.html</string>
     <string name="menu_nav_search">Search</string>
     <string name="menu_nav_remove">Uninstall</string>

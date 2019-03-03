@@ -17,20 +17,22 @@
 package github.nisrulz.projectpackagehunter.views.main
 
 import android.content.Intent
-import android.net.Uri
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
 import github.nisrulz.packagehunter.PackageHunter
 import github.nisrulz.packagehunter.PkgInfo
 import github.nisrulz.projectpackagehunter.R
 import github.nisrulz.projectpackagehunter.R.string
+import github.nisrulz.projectpackagehunter.utils.openInBrowser
 import github.nisrulz.projectpackagehunter.views.AboutActivity
 import github.nisrulz.projectpackagehunter.views.detail.DetailActivity
 import github.nisrulz.recyclerviewhelper.RVHItemClickListener
 import github.nisrulz.recyclerviewhelper.RVHItemClickListener.OnItemClickListener
+import kotlinx.android.synthetic.main.activity_main.brandSection
 import kotlinx.android.synthetic.main.toolbar.toolbar
 import java.util.ArrayList
 
@@ -60,6 +62,9 @@ class MainActivity : AppCompatActivity() {
         rv.hasFixedSize()
         rv.layoutManager = androidx.recyclerview.widget.LinearLayoutManager(this)
         rv.adapter = adapter
+
+        brandSection.visibility = View.GONE
+        rv.visibility = View.VISIBLE
 
         // Set On Click
         rv.addOnItemTouchListener(
@@ -108,10 +113,7 @@ class MainActivity : AppCompatActivity() {
                 overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out)
             }
             R.id.action_privacy -> {
-                val uri = Uri.parse(
-                        getString(string.url_privacy_policy))
-                val browserIntent = Intent(Intent.ACTION_VIEW, uri)
-                startActivity(browserIntent)
+                openInBrowser(getString(string.url_privacy_policy))
                 overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out)
             }
         }
