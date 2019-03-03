@@ -17,59 +17,70 @@
 package github.nisrulz.projectpackagehunter.views.detail
 
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
-import androidx.recyclerview.widget.LinearLayoutManager
 import github.nisrulz.packagehunter.PackageHunter
 import github.nisrulz.projectpackagehunter.R
 import github.nisrulz.projectpackagehunter.modal.ElementInfo
 import kotlinx.android.synthetic.main.activity_detail.imgvw_icn
 import kotlinx.android.synthetic.main.activity_detail.rv_detaillist
-import kotlinx.android.synthetic.main.activity_detail.toolbar
 import kotlinx.android.synthetic.main.activity_detail.txtvw_firsttime
 import kotlinx.android.synthetic.main.activity_detail.txtvw_lastupdated
 import kotlinx.android.synthetic.main.activity_detail.txtvw_pkgname
 import kotlinx.android.synthetic.main.activity_detail.txtvw_vc
 import kotlinx.android.synthetic.main.activity_detail.txtvw_vname
+import kotlinx.android.synthetic.main.toolbar.toolbar
 import java.util.ArrayList
 import java.util.Locale
+
 
 class DetailActivity : AppCompatActivity() {
 
     private lateinit var packageHunter: PackageHunter
+    private lateinit var pkgNameOfApp: String
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_detail)
+        setContentView(github.nisrulz.projectpackagehunter.R.layout.activity_detail)
 
         setSupportActionBar(toolbar)
+        supportActionBar?.apply {
+            // Enable Home Button
+            setHomeButtonEnabled(true)
+            // Show HOme Button
+            setDisplayShowHomeEnabled(true)
+            // Set Home Button to act as up navigation
+            setDisplayHomeAsUpEnabled(true)
+        }
 
         packageHunter = PackageHunter(this)
 
-        val packageName = intent.getStringExtra("data")
+        pkgNameOfApp = intent.getStringExtra("data")
 
-        val appName = packageHunter.getAppNameForPkg(packageName)
+        val appName = packageHunter.getAppNameForPkg(pkgNameOfApp)
 
-        txtvw_vname.text = "Version : " + packageHunter.getVersionForPkg(packageName)
-        txtvw_vc.text = "Version Code : " + packageHunter.getVersionCodeForPkg(packageName)
+        txtvw_vname.text = "Version : ${packageHunter.getVersionForPkg(pkgNameOfApp)}"
+        txtvw_vc.text = "Version Code : ${packageHunter.getVersionCodeForPkg(pkgNameOfApp)}"
+        txtvw_firsttime.text = "First Install Time : ${getFormattedUpTime(packageHunter.getFirstInstallTimeForPkg(pkgNameOfApp))}"
+        txtvw_lastupdated.text = "Last Update Time : ${getFormattedUpTime(packageHunter.getLastUpdatedTimeForPkg(pkgNameOfApp))}"
+
+        imgvw_icn.setImageDrawable(packageHunter.getIconForPkg(pkgNameOfApp))
+
         txtvw_pkgname.text = appName
-        txtvw_firsttime.text = "First Install Time : " + getFormattedUpTime(packageHunter.getFirstInstallTimeForPkg(packageName))
-        txtvw_lastupdated.text = "Last Update Time : " + getFormattedUpTime(packageHunter.getLastUpdatedTimeForPkg(packageName))
-
-        imgvw_icn.setImageDrawable(packageHunter.getIconForPkg(packageName))
-
-        txtvw_pkgname.setOnClickListener {
-            packageHunter.uninstallPackage(packageName)
-            endActivityWithAnim()
-        }
-
 
         supportActionBar?.title = appName
 
-
-        val adapter = RVDetailsAdapter(getInfoLists(packageName))
+        val adapter = RVDetailsAdapter(getInfoLists(pkgNameOfApp))
         rv_detaillist.setHasFixedSize(true)
         rv_detaillist.layoutManager = androidx.recyclerview.widget.LinearLayoutManager(this)
         rv_detaillist.adapter = adapter
+    }
+
+    override fun onSupportNavigateUp(): Boolean {
+        onBackPressed()
+        return true
     }
 
     private fun getInfoLists(packageName: String): ArrayList<ElementInfo> {
@@ -93,12 +104,6 @@ class DetailActivity : AppCompatActivity() {
 
     override fun onBackPressed() {
         super.onBackPressed()
-        endActivityWithAnim()
-    }
-
-
-    private fun endActivityWithAnim() {
-        overridePendingTransition(android.R.anim.slide_in_left, android.R.anim.slide_out_right)
         finish()
     }
 
@@ -108,5 +113,20 @@ class DetailActivity : AppCompatActivity() {
         val hr = (millis / (1000 * 60 * 60) % 24).toInt()
 
         return String.format(Locale.US, "%02d:%02d:%02d", hr, min, sec)
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        menuInflater.inflate(R.menu.menu_detail, menu)
+        return super.onCreateOptionsMenu(menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.action_remove -> {
+                packageHunter.uninstallPackage(pkgNameOfApp)
+            }
+        }
+
+        return super.onOptionsItemSelected(item)
     }
 }

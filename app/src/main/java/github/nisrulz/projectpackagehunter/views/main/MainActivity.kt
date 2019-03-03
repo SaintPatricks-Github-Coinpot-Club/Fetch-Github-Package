@@ -19,13 +19,10 @@ package github.nisrulz.projectpackagehunter.views.main
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-import androidx.core.view.MenuItemCompat
-import androidx.appcompat.app.AppCompatActivity
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import androidx.appcompat.widget.SearchView
 import android.view.Menu
 import android.view.MenuItem
+import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.SearchView
 import github.nisrulz.packagehunter.PackageHunter
 import github.nisrulz.packagehunter.PkgInfo
 import github.nisrulz.projectpackagehunter.R
@@ -34,7 +31,7 @@ import github.nisrulz.projectpackagehunter.views.AboutActivity
 import github.nisrulz.projectpackagehunter.views.detail.DetailActivity
 import github.nisrulz.recyclerviewhelper.RVHItemClickListener
 import github.nisrulz.recyclerviewhelper.RVHItemClickListener.OnItemClickListener
-import kotlinx.android.synthetic.main.activity_main.toolbar
+import kotlinx.android.synthetic.main.toolbar.toolbar
 import java.util.ArrayList
 
 
@@ -49,7 +46,10 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
         setSupportActionBar(toolbar)
+        supportActionBar?.setHomeButtonEnabled(true)
+        supportActionBar?.setDisplayShowHomeEnabled(true)
 
         packageHunter = PackageHunter(this)
 
@@ -67,20 +67,24 @@ class MainActivity : AppCompatActivity() {
                     val i = Intent(this@MainActivity, DetailActivity::class.java)
                     i.putExtra("data", pkgInfoArrayList[position].packageName)
                     startActivity(i)
-                    overridePendingTransition(android.R.anim.slide_in_left, android.R.anim.slide_out_right)
                 }))
+    }
+
+    override fun onSupportNavigateUp(): Boolean {
+        onBackPressed()
+        return true
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         val inflater = menuInflater
         inflater.inflate(R.menu.menu_main, menu)
         val searchViewItem = menu.findItem(R.id.action_search)
-        val searchViewAndroidActionBar = MenuItemCompat.getActionView(searchViewItem) as SearchView
+        val searchViewAndroidActionBar = searchViewItem.actionView as SearchView
         searchViewAndroidActionBar.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextChange(query: String): Boolean {
 
                 pkgInfoArrayList = packageHunter.searchInList(query, PackageHunter.PACKAGES)
-                adapter?.updateWithNewListData(pkgInfoArrayList)
+                adapter.updateWithNewListData(pkgInfoArrayList)
 
                 return false
             }
@@ -101,13 +105,14 @@ class MainActivity : AppCompatActivity() {
             }
             R.id.action_about -> {
                 startActivity(Intent(this@MainActivity, AboutActivity::class.java))
-                overridePendingTransition(android.R.anim.slide_in_left, android.R.anim.slide_out_right)
+                overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out)
             }
             R.id.action_privacy -> {
                 val uri = Uri.parse(
                         getString(string.url_privacy_policy))
                 val browserIntent = Intent(Intent.ACTION_VIEW, uri)
                 startActivity(browserIntent)
+                overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out)
             }
         }
 
